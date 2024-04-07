@@ -8,6 +8,14 @@ class ResponsableV
   private $nombre;
   private $apellido;
 
+  public function __construct($nroEmpleado, $nroLicencia, $nombre, $apellido)
+  {
+    $this->nroEmpleado = $nroEmpleado;
+    $this->nroLicencia = $nroLicencia;
+    $this->nombre = $nombre;
+    $this->apellido = $apellido;
+  }
+
   //getters
   public function getNroEmpleado()
   {

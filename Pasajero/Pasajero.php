@@ -8,6 +8,13 @@ class Pasajero
   private $doc;
   private $tel;
 
+  public function __construct($nombre, $apellido, $doc, $tel)
+  {
+    $this->nombre = $nombre;
+    $this->apellido = $apellido;
+    $this->doc = $doc;
+    $this->tel = $tel;
+  }
   //getters
   public function getNombre()
   {
