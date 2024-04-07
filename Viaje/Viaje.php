@@ -10,12 +10,12 @@ class Viaje
   private $colObjPasajeros;
   private $objResponsableV;
 
-  public function __construct(int $codigo, $destino, int $cantMaxPasajeros, $pasajeros, $objResponsableV)
+  public function __construct(int $codigo, $destino, int $cantMaxPasajeros, $objResponsableV)
   {
     $this->codigo = $codigo;
     $this->destino = $destino;
     $this->cantMaxPasajeros = $cantMaxPasajeros;
-    $this->colObjPasajeros = [$pasajeros];
+    $this->colObjPasajeros = [];
     $this->objResponsableV = $objResponsableV;
   }
   //getters
@@ -97,6 +97,29 @@ class Viaje
       $nuevoPasajero = new Pasajero($nombre, $apellido, $doc, $tel);
       array_push($this->colObjPasajeros, $nuevoPasajero);
     }
+  }
+
+  /**
+   * encuentra el pasajero dado un DNI y devuelve su posición en la colección
+   * @param int $DNI
+   * @return int
+   */
+  public function encontrarPasajero($DNI)
+  {
+    $i = 0;
+    $encontrado = false;
+    $pasajeros = $this->getPasajeros();
+    $pasajeroEncontrado = -1;
+    while ($i < count($pasajeros) && !$encontrado) {
+      if ($pasajeros[$i]->getDoc() == $DNI) {
+        $encontrado = !$encontrado;
+      }
+      $i++;
+    }
+    if ($encontrado) {
+      $pasajeroEncontrado =  $i - 1;
+    }
+    return $pasajeroEncontrado;
   }
 
   public function __toString()
