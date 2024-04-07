@@ -1,5 +1,4 @@
 <?php
-include_once "../Pasajero/Pasajero.php";
 
 class Viaje
 {
@@ -82,21 +81,22 @@ class Viaje
    * @param int $doc
    * @param int $tel
    */
-  public function agregarPasajero($nombre, $apellido, $doc, $tel)
+  public function agregarPasajero($nuevoPasajero)
   {
-    $pasajeros = $this->getPasajeros();
-    $i = 0;
-    $yaExiste = false;
-    while ($i < count($pasajeros) && !$yaExiste) {
-      if ($pasajeros[$i]->getDoc() == $doc) {
-        $yaExiste = !$yaExiste;
-      }
-      $i++;
-    }
-    if (!$yaExiste && count($pasajeros) < $this->getCantMaxPasajeros()) {
-      $nuevoPasajero = new Pasajero($nombre, $apellido, $doc, $tel);
-      array_push($this->colObjPasajeros, $nuevoPasajero);
-    }
+    // $pasajeros = $this->getPasajeros();
+    // $i = 0;
+    // $yaExiste = false;
+    // while ($i < count($pasajeros) && !$yaExiste) {
+    //   if ($pasajeros[$i]->getDoc() == $doc) {
+    //     $yaExiste = !$yaExiste;
+    //   }
+    //   $i++;
+    // }
+    // if (!$yaExiste && count($pasajeros) < $this->getCantMaxPasajeros()) {
+    //   $nuevoPasajero = new Pasajero($nombre, $apellido, $doc, $tel);
+    //   array_push($this->colObjPasajeros, $nuevoPasajero);
+    // }
+    array_push($this->colObjPasajeros, $nuevoPasajero);
   }
 
   /**
@@ -124,7 +124,6 @@ class Viaje
 
   public function __toString()
   {
-    print_r($this->getPasajeros());
     return "Código de viaje: "
       . $this->getCodigo()
       . "\n"

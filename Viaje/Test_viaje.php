@@ -12,7 +12,8 @@ function menu()
   echo "3- Mostrar Pasajeros\n";
   echo "4- Mostrar información de un pasajero\n";
   echo "5- Mostrar información de el responsable del viaje\n";
-  echo "6- Salir\n";
+  echo "6- Mostrar información del viaje\n";
+  echo "7- Salir\n";
   echo "Ingrese el número de la operación que desea realizar\n=>";
   return trim(fgets(STDIN));
 }
@@ -41,16 +42,37 @@ do {
   switch ($opcion) {
     case 1:
       // opción 1: agregar pasajero
-      echo "Ingrese nombre \n=>";
-      $nombre = trim((fgets(STDIN)));
-      echo "Ingrese apellido \n=>";
-      $apellido = trim((fgets(STDIN)));
-      echo "Ingrese documento \n=>";
-      $documento = trim((fgets(STDIN)));
-      echo "Ingrese telefono\n=>";
-      $telefono = trim((fgets(STDIN)));
+      $pasajeros = $objViaje->getPasajeros();
+      if (count($pasajeros) + 1 > $objViaje->getCantMaxPasajeros()) {
+        echo "Capacidad máxima de pasajeros alcanzada \n";
+      } else {
 
-      $objViaje->agregarPasajero($nombre, $apellido, $documento, $telefono);
+        echo "Ingrese documento \n=>";
+        $documento = trim((fgets(STDIN)));
+        $i = 0;
+        $yaExiste = false;
+        while ($i < count($pasajeros) && !$yaExiste) {
+          if ($pasajeros[$i]->getDoc() == $documento) {
+            $yaExiste = !$yaExiste;
+          }
+          $i++;
+        }
+        if ($yaExiste) {
+          echo "Ya existe un pasajero con ese Documento \n";
+        } else {
+          echo "Ingrese nombre \n=>";
+          $nombre = trim((fgets(STDIN)));
+          echo "Ingrese apellido \n=>";
+          $apellido = trim((fgets(STDIN)));
+          echo "Ingrese telefono\n=>";
+          $telefono = trim((fgets(STDIN)));
+
+          $nuevoPasajero = new Pasajero($nombre, $apellido, $documento, $telefono);
+          $objViaje->agregarPasajero($nuevoPasajero);
+        }
+      }
+
+
       break;
     case 2:
       // opción 2: modificar pasajero
@@ -119,6 +141,10 @@ do {
       echo $objViaje->getResponsableV();
       break;
     case 6:
+      // opción 6: mostrar información del viaje
+      echo $objViaje;
+      break;
+    case 7:
       // opción 6: salir
       $salir = !$salir;
       break;
