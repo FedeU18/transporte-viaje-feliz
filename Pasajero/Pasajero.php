@@ -4,61 +4,51 @@ class Pasajero
 {
   //variables
   private $nombre;
-  private $apellido;
-  private $doc;
-  private $tel;
+  private $asiento;
+  private $nroTicket;
 
-  public function __construct($nombre, $apellido, $doc, $tel)
+  public function __construct($nombre, $asiento, $nroTicket,)
   {
     $this->nombre = $nombre;
-    $this->apellido = $apellido;
-    $this->doc = $doc;
-    $this->tel = $tel;
+    $this->asiento = $asiento;
+    $this->nroTicket = $nroTicket;
   }
   //getters
   public function getNombre()
   {
     return $this->nombre;
   }
-  public function getApellido()
+  public function getAsiento()
   {
-    return $this->apellido;
+    return $this->asiento;
   }
-  public function getDoc()
+  public function getNroTicket()
   {
-    return $this->doc;
+    return $this->nroTicket;
   }
-  public function getTel()
-  {
-    return $this->tel;
-  }
+
   //setters
   public function setNombre($nuevoNombre)
   {
     $this->nombre = $nuevoNombre;
   }
-  public function setApellido($nuevoApellido)
+  public function setAsiento($nuevoAsiento)
   {
-    $this->apellido = $nuevoApellido;
+    $this->asiento = $nuevoAsiento;
   }
-  public function setDoc($nuevoDoc)
+  public function setDoc($nuevoNroTicket)
   {
-    $this->doc = $nuevoDoc;
+    $this->nroTicket = $nuevoNroTicket;
   }
-  public function setTel($nuevoTel)
-  {
-    $this->tel = $nuevoTel;
-  }
+
 
   public function __toString()
   {
     return $this->getNombre()
       . " "
-      . $this->getApellido()
+      . $this->getAsiento()
       . "\n"
-      . $this->getDoc()
-      . "\n"
-      . $this->getTel()
+      . $this->getNroTicket()
       . "\n";
   }
 }
