@@ -7,7 +7,7 @@ class Pasajero
   private $asiento;
   private $nroTicket;
 
-  public function __construct($nombre, $asiento, $nroTicket,)
+  public function __construct($nombre, $asiento, $nroTicket)
   {
     $this->nombre = $nombre;
     $this->asiento = $asiento;
@@ -39,6 +39,11 @@ class Pasajero
   public function setDoc($nuevoNroTicket)
   {
     $this->nroTicket = $nuevoNroTicket;
+  }
+
+  public function darPorcentajeIncremento()
+  {
+    return 1.10;
   }
 
 
