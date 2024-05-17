@@ -8,14 +8,16 @@ class Viaje
   private $cantMaxPasajeros;
   private $colObjPasajeros;
   private $objResponsableV;
+  private $costo;
 
-  public function __construct(int $codigo, $destino, int $cantMaxPasajeros, $objResponsableV)
+  public function __construct(int $codigo, $destino, int $cantMaxPasajeros, $objResponsableV, $costo)
   {
     $this->codigo = $codigo;
     $this->destino = $destino;
     $this->cantMaxPasajeros = $cantMaxPasajeros;
     $this->colObjPasajeros = [];
     $this->objResponsableV = $objResponsableV;
+    $this->costo = $costo;
   }
   //getters
   public function getCodigo()
@@ -38,6 +40,10 @@ class Viaje
   {
     return $this->objResponsableV;
   }
+  public function getCosto()
+  {
+    return $this->costo;
+  }
 
   //setters
   public function setCodigo($nuevoCodigo)
@@ -52,51 +58,13 @@ class Viaje
   {
     $this->cantMaxPasajeros = $nuevaCantMax;
   }
-  // public function setPasajero($DNI, $nuevaInfoPasajero, $accion)
-  // {
-  //   $i = 0;
-  //   $yaExiste = false;
-  //   $pasajeros = $this->getPasajeros();
-  //   //verificar si un pasajero con ese dni ya existe
-  //   while ($i < count($pasajeros) && !$yaExiste) {
-  //     if ($pasajeros[$i]["DNI"] == $DNI) {
-  //       $yaExiste = !$yaExiste;
-  //     }
-  //     $i++;
-  //   }
-  //   //verifica si existe el pasajero y lo modifica
-  //   if ($yaExiste && $accion == "modificar") {
-  //     $this->pasajeros[$i - 1] = $nuevaInfoPasajero;
-  //   }
-  //   //verifica si no existe el pasajero y lo crea
-  //   elseif (!$yaExiste && $accion == "crear") {
-  //     array_push($this->pasajeros, $nuevaInfoPasajero);
-  //   }
-  // }
-
-  /**
-   * Agrega un nuevo pasajero a la colección
-   * @param string $nombre
-   * @param string $apellido
-   * @param int $doc
-   * @param int $tel
-   */
-  public function agregarPasajero($nuevoPasajero)
+  public function setColObjPasajeros($nuevaCol)
   {
-    // $pasajeros = $this->getPasajeros();
-    // $i = 0;
-    // $yaExiste = false;
-    // while ($i < count($pasajeros) && !$yaExiste) {
-    //   if ($pasajeros[$i]->getDoc() == $doc) {
-    //     $yaExiste = !$yaExiste;
-    //   }
-    //   $i++;
-    // }
-    // if (!$yaExiste && count($pasajeros) < $this->getCantMaxPasajeros()) {
-    //   $nuevoPasajero = new Pasajero($nombre, $apellido, $doc, $tel);
-    //   array_push($this->colObjPasajeros, $nuevoPasajero);
-    // }
-    array_push($this->colObjPasajeros, $nuevoPasajero);
+    $this->colObjPasajeros = $nuevaCol;
+  }
+  public function setCosto($nuevoCosto)
+  {
+    $this->costo = $nuevoCosto;
   }
 
   /**
@@ -104,14 +72,14 @@ class Viaje
    * @param int $DNI
    * @return int
    */
-  public function encontrarPasajero($DNI)
+  public function encontrarPasajero($nroTicket)
   {
     $i = 0;
     $encontrado = false;
     $pasajeros = $this->getPasajeros();
     $pasajeroEncontrado = -1;
     while ($i < count($pasajeros) && !$encontrado) {
-      if ($pasajeros[$i]->getDoc() == $DNI) {
+      if ($pasajeros[$i]->getNroTicket() == $nroTicket) {
         $encontrado = !$encontrado;
       }
       $i++;
